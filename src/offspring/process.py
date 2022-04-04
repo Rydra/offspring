@@ -113,6 +113,7 @@ class SubprocessLoop(Subprocess):
         """Handle signals within our child process to terminate the main loop"""
         log.info("Caught signal %s", signum)
         self.alive = False
+        sys.exit()
 
     def run(self):
         signal.signal(signal.SIGTERM, self.signal_handler)
@@ -130,7 +131,6 @@ class SubprocessLoop(Subprocess):
             log.debug("Exit via interrupt")
         finally:
             self.end()
-            sys.exit()
 
     def begin(self):
         pass
